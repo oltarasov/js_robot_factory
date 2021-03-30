@@ -20,6 +20,7 @@ The third part is to build delivery drone constructor and his prototype accordin
 - DeliveryDrone constructor takes `maxLoadWeight`, `currentLoad` and sets it to his instances;
 - DeliveryDrone prototype has method `hookLoad`, which saved the load object to `currentLoad` of DeliveryDrone instances if `weight` of cargo less than `maxLoadWeight` of drone;
 - DeliveryDrone prototype has method `unhookLoad`, which sets initial value `null` to `currentLoad`;
+- If the DeliveryDrone instance is loaded with another load, `hookLoad` method should not replace the previous load with a new load.
 - The instance of DeliveryDrone can use all methods of BaseRobot, FlyingRobot, DeliveryDrone prototypes;
 
 Delivery Robot schema:
