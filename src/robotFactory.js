@@ -1,16 +1,10 @@
 'use strict';
 
-function BaseRobot() {
-  // implement
-}
+class BaseRobot {}
 
-function FlyingRobot() {
-  // implement
-}
+class FlyingRobot {}
 
-function DeliveryDrone() {
-  // implement
-}
+class DeliveryDrone {}
 
 module.exports = {
   BaseRobot,

@@ -1,31 +1,32 @@
 # Robot factory
-Let's consolidate our knowledge of prototypes and constructors!
-This task has 3 parts.
+Let's implement 3 classes with inheritance
 
-The first part is to build base robot's constructor and its prototype according to the following requirements:
-- BaseRobot function constructor takes `name`, `weight`, `coords`, `chipVersion` and sets them for his instances;
-- BaseRobot prototype has methods `goForward`, `goBack`, `goRight`, `goLeft`, which can take `step` prop or move the robot by 1 in the appropriate direction in the case when `step` is undefined;
-- BaseRobot prototype has method `getInfo`, which returns a string in the format `Robot: %name%, Chip version: %chipVersion%, Weight: %weight%`;
+**BaseRobot**
+- constructor takes `name`, `weight`, `coords`, `chipVersion` and saves them
+- `coords` should be set to 0 if not passed
+- `goForward`, `goBack`, `goRight` and `goLeft` methods take a `step` argument
+  (1 by default) and move the robot by `step` in the appropriate direction
+- `getInfo` method returns a string in the next format `Robot: %name%, Chip 
+  version: %chipVersion%, Weight: %weight%`
 
-The second part is to build flying robots constructor and his prototype according to the following requirements:
-- FlyingRobot prototype inherits BaseRobot prototype;
-- FlyingRobot constructor takes `name`, `weight`, `coords`, `chipVersion`, and transmits them to BaseRobot constructor;
-- FlyingRobot constructor sets `z` coordinate to `coords` object of his instances;
-- FlyingRobot prototype has methods `goUp` and `goDown`,  which can take `step` prop or move the robot by 1 in the `z` coordinate in the case when `step` is undefined;
-- The instance of FlyingRobot can use all methods from BaseRobot and FlyingRobot prototypes;
+**FlyingRobot**
+- inherits all the methods from `BaseRobot`
+- takes the same args as `BaseRobot` and passes them to the parent's constructor
+- can work with `z` `coords`
+- has methods `goUp` and `goDown` changing `z` coordinate by a given `step`
 
-The third part is to build delivery drone constructor and his prototype according to the following requirements:
-- DeliveryDrone prototype inherits FlyingRobot prototype;
-- DeliveryDrone constructor takes `name`, `weight`, `coords`, `chipVersion`, and transmits them to FlyingRobot constructor;
-- DeliveryDrone constructor takes `maxLoadWeight`, `currentLoad` and sets it to his instances;
-- DeliveryDrone prototype has method `hookLoad`, which saved the load object to `currentLoad` of DeliveryDrone instances if `weight` of cargo less than `maxLoadWeight` of drone;
-- DeliveryDrone prototype has method `unhookLoad`, which sets initial value `null` to `currentLoad`;
-- If the DeliveryDrone instance is loaded with another load, `hookLoad` method should not replace the previous load with a new load.
-- The instance of DeliveryDrone can use all methods of BaseRobot, FlyingRobot, DeliveryDrone prototypes;
+**DeliveryDrone**
+- inherits all the methods from `FlyingRobot` and calls its constructor
+- in addition to `FlyingRobot`'s args it takes `maxLoadWeight` and `currentLoad`
+  and saves them.
+- has `hookLoad` method taking a `cargo` object and saving it to a `currentLoad`
+  property if it is empty and the `cargo.weight` is not greater than the
+  `maxLoadWeight` of the drone.
+- if the drone already has `currentLoad` do not change it
+- has `unhookLoad` method, that `currentLoad` property to `null`
 
-Delivery Robot schema:
 ```
-deliveryRobot {
+DeliveryDrone {
   name: string
   weight: number
   chipVersion: number
@@ -40,7 +41,6 @@ deliveryRobot {
     z: number
   }
 }
-
 ```
 
 **Read [the guideline](https://github.com/mate-academy/js_task-guideline/blob/master/README.md) before start**
