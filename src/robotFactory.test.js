@@ -1,6 +1,6 @@
 'use strict';
 /* global require, describe, test, expect */
-/* eslint-disable object-curly-newline */
+/* eslint-disable object-curly-newline, max-len */
 
 const { BaseRobot, FlyingRobot, DeliveryDrone } = require('./robotFactory');
 
@@ -42,6 +42,15 @@ describe('BaseRobot class', () => {
 
     expect(robot.coords)
       .toEqual({ x: 0, y: 0 });
+  });
+
+  test('should set another coord to 0 by default if was passed only one', () => {
+    const position = { x: 3 };
+
+    const robot = new BaseRobot('Elon', 93, position, 0.1);
+
+    expect(robot.coords)
+      .toEqual({ x: 3, y: 0 });
   });
 
   test('should save the 4th constructor argument as a chipVersion', () => {
@@ -333,6 +342,13 @@ describe('DeliveryDrone class', () => {
         weight: 57,
         description: 'Some cargo',
       });
+  });
+
+  test(`should set 'currentLoad' prop to null by default`, () => {
+    const robot = new DeliveryDrone('X', 9, {}, 0.7, 80);
+
+    expect(robot.currentLoad)
+      .toBe(null);
   });
 
   test(`should have an own 'hookLoad' method`, () => {
